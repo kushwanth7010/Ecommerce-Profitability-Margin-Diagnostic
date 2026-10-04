@@ -1,0 +1,4 @@
+channel,orders,net_revenue_inr,cogs_inr,shipping_inr,fees_inr,contribution_profit_inr,purchased_units,returned_units,contribution_margin_pct,unit_return_rate_pct
+Marketplace,4389,14972951.178,11763245.3,509046.98,673782.803,2026876.095,8593,628,13.537,7.308
+Mobile App,3048,10307029.721,8118220.6,349271.67,267982.773,1571554.678,5858,258,15.247,4.404
+Website,4563,15551977.754,12209412.07,523353.08,326591.533,2492621.071,8809,376,16.028,4.268

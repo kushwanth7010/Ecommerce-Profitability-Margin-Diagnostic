@@ -1,0 +1,6 @@
+target_price_increase_pct,assumed_revenue_gain_inr,incremental_variable_fees_inr,illustrative_contribution_gain_inr,scenario_total_revenue_inr,scenario_contribution_profit_inr,scenario_contribution_margin_pct
+0.0,0.0,0.0,0.0,40831958.65,6091051.84,14.917
+3.0,67634.78,2092.49,65542.29,40899593.43,6156594.13,15.053
+5.0,112724.64,3487.49,109237.15,40944683.29,6200288.99,15.143
+8.0,180359.42,5579.98,174779.44,41012318.07,6265831.28,15.278
+10.0,225449.27,6974.97,218474.3,41057407.92,6309526.14,15.368
