@@ -1,0 +1,23 @@
+{
+  "dataset": "100% synthetic; prices and costs are fictional INR-denominated model inputs",
+  "period_start": "2024-01-01",
+  "period_end": "2025-12-31",
+  "order_count": 12000,
+  "order_line_count": 18717,
+  "product_count": 120,
+  "purchased_units": 23260,
+  "returned_units": 1262,
+  "unit_return_rate_pct": 5.426,
+  "net_revenue_inr": 40831958.65,
+  "cogs_inr": 32090877.97,
+  "outbound_shipping_inr": 1381671.73,
+  "variable_fees_inr": 1268357.11,
+  "gross_profit_inr": 8741080.68,
+  "gross_margin_pct": 21.407,
+  "contribution_profit_inr": 6091051.84,
+  "contribution_margin_pct": 14.917,
+  "loss_making_sku_count": 10,
+  "pricing_target_net_revenue_inr": 2254492.71,
+  "pricing_target_weighted_fee_rate": 0.0309381,
+  "pricing_target_definition": "SKUs with negative total contribution over the observed synthetic period"
+}

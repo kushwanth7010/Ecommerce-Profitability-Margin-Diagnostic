@@ -1,0 +1,53 @@
+name: Build, test and publish reproducible outputs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    env:
+      PYTEST_DISABLE_PLUGIN_AUTOLOAD: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Rebuild synthetic dataset
+        run: python -W error -m src.generate_data --orders 12000 --seed 2026
+      - name: Rebuild SQLite database
+        run: python -W error -m src.build_db
+      - name: Produce analytics and charts
+        run: python -W error -m src.analyze
+      - name: Run tests with warnings treated as errors
+        run: python -W error -m pytest -q -ra
+      - name: Validate database integrity
+        run: |
+          python - <<'PY'
+          import sqlite3
+          from contextlib import closing
+          with closing(sqlite3.connect('outputs/ecommerce.sqlite')) as db:
+              assert db.execute('PRAGMA integrity_check').fetchone()[0] == 'ok'
+              assert not db.execute('PRAGMA foreign_key_check').fetchall()
+          print('Database integrity OK; zero foreign-key violations')
+          PY
+      - name: Commit generated synthetic dataset and reports
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f data/*.csv outputs/*.csv outputs/*.png outputs/*.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Publish reproducible synthetic dataset and analytics outputs [skip ci]'
+            git push
+          fi
